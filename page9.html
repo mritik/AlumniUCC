@@ -1,15 +1,10 @@
 <html>
     
     <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-
-
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <title>Edit Profile</title>
     </head>
     
     
@@ -32,20 +27,91 @@
 
         <br>
         
-        <b><h3 class="center-align" style=" color: #003366; font-weight: 600">Update Contact Information</h3></b>
-        
+        <b><h3 class="center-align" style=" color: #003366; font-weight: 600">Update Contact Information</h3></b>        
 
-        
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        
+    <body>
+        <div class="container-fluid" >
+            <div class="row mx-1">
+                <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 blue lighten-4 shadow mb-5 border border-primary mt-5">
+                    <div class="row">
+                        <div class="col col-md-9 px-3 py-4 text-dark mx-5">
+                            <div id="editProfileForm">
+                                <h2 class="h2 text-center text-dark mb-3">Contact Info</h2>
+                                <div class="form-group">
+                                    <label for="userFirstName">First Name<span class="text-danger ml-1">*</span></label>
+                                    <input type="text" class="form-control" id="userFirstName" onblur="checkUserFirstName()">
+                                    <small id="userFirstNameError" class="form-text text-danger" style="display:none">Please fill the field.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userSurname">Last Name<span class="text-danger ml-1">*</span></label>
+                                    <input type="text" class="form-control" id="userSurname" onblur="checkUserSurname()">
+                                    <small id="userSurnameError" class="form-text text-danger" style="display:none">Please fill the field.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCountry">Age</label>
+                                    <input type="text" class="form-control" id="userCountry">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCountry">Country</label>
+                                    <input type="text" class="form-control" id="userCountry">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCountry">Year of Graduation</label>
+                                    <input type="text" class="form-control" id="userGrade">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCountry">UCC House</label>
+                                    <input type="text" class="form-control" id="userCountry">
+                                </div>
+                                <div class="form-group">
+                                    <label for="userCountry">State of Employment</label>
+                                    <input type="text" class="form-control" id="userGrade">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="userCountry">Postal Code</label>
+                                    <input type="text" class="form-control" id="userGrade">
+                                </div>
+
+                                <button type="button" class="btn btn-outline-primary btn-block text-uppercase mb-3" onclick="window.location='index.html';">Save</button>
+                                <button type="button" class="btn btn-outline-secondary btn-block text-uppercase" onclick="window.location='index.html';">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            var ref = firebase.database().ref('Users/'+localStorage.userID);
+            ref.once("value", getProfile, errorProfile);
+
+            function getProfile(data)
+            {
+                profile = data.val();
+                userFName = profile.userFirstName;
+                userLName = profile.userSurname;
+                userGrade = profile.userGrade;
+                userCtry = profile.userCountry;
+                userB = profile.userBio;
+
+                console.log(userFName);
+                console.log(userLName);
+                document.getElementById("userFirstName").value = userFName;
+                document.getElementById("userGrade").value = userGrade;
+                document.getElementById("userSurname").value = userLName;
+                document.getElementById("userCountry").value = userCtry;
+                document.getElementById("userBio").value = userB;
+            }
+
+            function errorProfile(err)
+            {
+                console.log('Error!')
+                console.log(err)
+            }            
+        </script>
+    </body>
         
         <footer class="page-footer" style="height: 200px; background-color: #003366">
           <div class="container">
